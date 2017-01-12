@@ -1,6 +1,12 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
 var _simpleAssign = require('simple-assign');
 
@@ -15,8 +21,6 @@ var _Paper = require('./Paper');
 var _Paper2 = _interopRequireDefault(_Paper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var AppBar = _react2.default.createClass({
   displayName: 'AppBar',
@@ -121,20 +125,19 @@ var AppBar = _react2.default.createClass({
     }
   },
   render: function render() {
-    var _props = this.props;
-    var title = _props.title;
-    var titleStyle = _props.titleStyle;
-    var className = _props.className;
-    var style = _props.style;
-    var zDepth = _props.zDepth;
-    var children = _props.children;
-    var navIcon = _props.navIcon;
-    var filterIcon = _props.filterIcon;
-    var actionIcons = _props.actionIcons;
-    var moreIcon = _props.moreIcon;
-    var iconStyleRight = _props.iconStyleRight;
-
-    var other = _objectWithoutProperties(_props, ['title', 'titleStyle', 'className', 'style', 'zDepth', 'children', 'navIcon', 'filterIcon', 'actionIcons', 'moreIcon', 'iconStyleRight']);
+    var _props = this.props,
+        title = _props.title,
+        titleStyle = _props.titleStyle,
+        className = _props.className,
+        style = _props.style,
+        zDepth = _props.zDepth,
+        children = _props.children,
+        navIcon = _props.navIcon,
+        filterIcon = _props.filterIcon,
+        actionIcons = _props.actionIcons,
+        moreIcon = _props.moreIcon,
+        iconStyleRight = _props.iconStyleRight,
+        other = (0, _objectWithoutProperties3.default)(_props, ['title', 'titleStyle', 'className', 'style', 'zDepth', 'children', 'navIcon', 'filterIcon', 'actionIcons', 'moreIcon', 'iconStyleRight']);
 
     var titleElement = void 0;
     var navIconElement = void 0;
@@ -235,7 +238,7 @@ var AppBar = _react2.default.createClass({
 
     return _react2.default.createElement(
       _Paper2.default,
-      _extends({}, other, {
+      (0, _extends3.default)({}, other, {
         rounded: false,
         className: className,
         style: (0, _simpleAssign2.default)({}, styles.root, style),

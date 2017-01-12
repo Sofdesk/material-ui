@@ -4,9 +4,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _simpleAssign = require('simple-assign');
 
@@ -42,14 +66,6 @@ var _PopoverAnimationVertical2 = _interopRequireDefault(_PopoverAnimationVertica
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var anchorOrigin = {
   vertical: 'top',
   horizontal: 'left'
@@ -77,11 +93,14 @@ function getStyles(props, context) {
     label: {
       color: disabled ? palette.disabledColor : palette.textColor,
       lineHeight: spacing.desktopToolbarHeight + 'px',
+      overflow: 'hidden',
       opacity: 1,
       position: 'relative',
       paddingLeft: spacing.desktopGutter,
       paddingRight: spacing.iconSize + spacing.desktopGutterLess + spacing.desktopGutterMini,
-      top: 0
+      textOverflow: 'ellipsis',
+      top: 0,
+      whiteSpace: 'nowrap'
     },
     labelWhenOpen: {
       opacity: 0,
@@ -111,20 +130,20 @@ function getStyles(props, context) {
 }
 
 var DropDownMenu = function (_Component) {
-  _inherits(DropDownMenu, _Component);
+  (0, _inherits3.default)(DropDownMenu, _Component);
 
   function DropDownMenu() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, DropDownMenu);
+    (0, _classCallCheck3.default)(this, DropDownMenu);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DropDownMenu.__proto__ || Object.getPrototypeOf(DropDownMenu)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DropDownMenu.__proto__ || (0, _getPrototypeOf2.default)(DropDownMenu)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       open: false
     }, _this.handleTouchTapControl = function (event) {
       event.preventDefault();
@@ -138,17 +157,24 @@ var DropDownMenu = function (_Component) {
       _this.setState({
         open: false,
         anchorEl: null
+      }, function () {
+        if (_this.props.onClose) {
+          _this.props.onClose();
+        }
       });
     }, _this.handleItemTouchTap = function (event, child, index) {
       event.persist();
       _this.setState({
         open: false
       }, function () {
+        if (_this.props.onClose) {
+          _this.props.onClose();
+        }
         if (_this.props.onChange) {
           _this.props.onChange(event, index, child.props.value);
         }
       });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   // The nested styles for drop-down-menu are modified by toolbar and possibly
@@ -156,7 +182,7 @@ var DropDownMenu = function (_Component) {
   // than just the parent.
 
 
-  _createClass(DropDownMenu, [{
+  (0, _createClass3.default)(DropDownMenu, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -221,34 +247,35 @@ var DropDownMenu = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var animated = _props.animated;
-      var animation = _props.animation;
-      var autoWidth = _props.autoWidth;
-      var children = _props.children;
-      var className = _props.className;
-      var iconStyle = _props.iconStyle;
-      var labelStyle = _props.labelStyle;
-      var listStyle = _props.listStyle;
-      var maxHeight = _props.maxHeight;
-      var menuStyleProp = _props.menuStyle;
-      var openImmediately = _props.openImmediately;
-      var style = _props.style;
-      var underlineStyle = _props.underlineStyle;
-      var value = _props.value;
-
-      var other = _objectWithoutProperties(_props, ['animated', 'animation', 'autoWidth', 'children', 'className', 'iconStyle', 'labelStyle', 'listStyle', 'maxHeight', 'menuStyle', 'openImmediately', 'style', 'underlineStyle', 'value']);
-
-      var _state = this.state;
-      var anchorEl = _state.anchorEl;
-      var open = _state.open;
+      var _props = this.props,
+          animated = _props.animated,
+          animation = _props.animation,
+          autoWidth = _props.autoWidth,
+          children = _props.children,
+          className = _props.className,
+          iconStyle = _props.iconStyle,
+          labelStyle = _props.labelStyle,
+          listStyle = _props.listStyle,
+          maxHeight = _props.maxHeight,
+          menuStyleProp = _props.menuStyle,
+          onClose = _props.onClose,
+          openImmediately = _props.openImmediately,
+          menuItemStyle = _props.menuItemStyle,
+          selectedMenuItemStyle = _props.selectedMenuItemStyle,
+          style = _props.style,
+          underlineStyle = _props.underlineStyle,
+          value = _props.value,
+          other = (0, _objectWithoutProperties3.default)(_props, ['animated', 'animation', 'autoWidth', 'children', 'className', 'iconStyle', 'labelStyle', 'listStyle', 'maxHeight', 'menuStyle', 'onClose', 'openImmediately', 'menuItemStyle', 'selectedMenuItemStyle', 'style', 'underlineStyle', 'value']);
+      var _state = this.state,
+          anchorEl = _state.anchorEl,
+          open = _state.open;
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context);
 
       var displayValue = '';
       _react2.default.Children.forEach(children, function (child) {
-        if (value === child.props.value) {
+        if (child && value === child.props.value) {
           // This will need to be improved (in case primaryText is a node)
           displayValue = child.props.label || child.props.primaryText;
         }
@@ -265,7 +292,7 @@ var DropDownMenu = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        _extends({}, other, {
+        (0, _extends3.default)({}, other, {
           ref: 'root',
           className: className,
           style: prepareStyles((0, _simpleAssign2.default)({}, styles.root, open && styles.rootWhenOpen, style))
@@ -301,7 +328,9 @@ var DropDownMenu = function (_Component) {
               value: value,
               style: menuStyle,
               listStyle: listStyle,
-              onItemTouchTap: this.handleItemTouchTap
+              onItemTouchTap: this.handleItemTouchTap,
+              menuItemStyle: menuItemStyle,
+              selectedMenuItemStyle: selectedMenuItemStyle
             },
             children
           )
@@ -309,12 +338,21 @@ var DropDownMenu = function (_Component) {
       );
     }
   }]);
-
   return DropDownMenu;
 }(_react.Component);
 
 DropDownMenu.muiName = 'DropDownMenu';
-DropDownMenu.propTypes = {
+DropDownMenu.defaultProps = {
+  animated: true,
+  autoWidth: true,
+  disabled: false,
+  openImmediately: false,
+  maxHeight: 500
+};
+DropDownMenu.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
+process.env.NODE_ENV !== "production" ? DropDownMenu.propTypes = {
   /**
    * If true, the popover will apply transitions when
    * it gets added to the DOM.
@@ -360,6 +398,10 @@ DropDownMenu.propTypes = {
    */
   maxHeight: _react.PropTypes.number,
   /**
+   * Override the inline-styles of menu items.
+   */
+  menuItemStyle: _react.PropTypes.object,
+  /**
    * Overrides the styles of `Menu` when the `DropDownMenu` is displayed.
    */
   menuStyle: _react.PropTypes.object,
@@ -372,9 +414,17 @@ DropDownMenu.propTypes = {
    */
   onChange: _react.PropTypes.func,
   /**
+   * Callback function fired when the menu is closed.
+   */
+  onClose: _react.PropTypes.func,
+  /**
    * Set to true to have the `DropDownMenu` automatically open on mount.
    */
   openImmediately: _react.PropTypes.bool,
+  /**
+   * Override the inline-styles of selected menu items.
+   */
+  selectedMenuItemStyle: _react.PropTypes.object,
   /**
    * Override the inline-styles of the root element.
    */
@@ -387,15 +437,5 @@ DropDownMenu.propTypes = {
    * The value that is currently selected.
    */
   value: _react.PropTypes.any
-};
-DropDownMenu.defaultProps = {
-  animated: true,
-  autoWidth: true,
-  disabled: false,
-  openImmediately: false,
-  maxHeight: 500
-};
-DropDownMenu.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
+} : void 0;
 exports.default = DropDownMenu;

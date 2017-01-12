@@ -1,6 +1,12 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
 var _simpleAssign = require('simple-assign');
 
@@ -27,8 +33,6 @@ var _colorManipulator = require('./utils/colorManipulator');
 var _colors = require('./styles/colors');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var TableItem = _react2.default.createClass({
   displayName: 'TableItem',
@@ -86,14 +90,12 @@ var TableItem = _react2.default.createClass({
     this.props.onTouchStart(e);
   },
   render: function render() {
-    var _props = this.props;
-    var children = _props.children;
-    var onTouchTap = _props.onTouchTap;
-    var style = _props.style;
-    var innerDivStyle = _props.innerDivStyle;
-
-    var other = _objectWithoutProperties(_props, ['children', 'onTouchTap', 'style', 'innerDivStyle']);
-
+    var _props = this.props,
+        children = _props.children,
+        onTouchTap = _props.onTouchTap,
+        style = _props.style,
+        innerDivStyle = _props.innerDivStyle,
+        other = (0, _objectWithoutProperties3.default)(_props, ['children', 'onTouchTap', 'style', 'innerDivStyle']);
     var prepareStyles = this.context.muiTheme.prepareStyles;
 
 
@@ -119,7 +121,7 @@ var TableItem = _react2.default.createClass({
 
     return _react2.default.createElement(
       _EnhancedButton2.default,
-      _extends({}, other, {
+      (0, _extends3.default)({}, other, {
         containerElement: 'div',
         onKeyboardFocus: this._handleKeyboardFocus,
         onMouseLeave: this._handleMouseLeave,
@@ -200,15 +202,13 @@ var TableList = _react2.default.createClass({
     }
   },
   render: function render() {
-    var _props2 = this.props;
-    var data = _props2.data;
-    var headers = _props2.headers;
-    var style = _props2.style;
-    var onHeaderClick = _props2.onHeaderClick;
-    var onItemClick = _props2.onItemClick;
-
-    var other = _objectWithoutProperties(_props2, ['data', 'headers', 'style', 'onHeaderClick', 'onItemClick']);
-
+    var _props2 = this.props,
+        data = _props2.data,
+        headers = _props2.headers,
+        style = _props2.style,
+        onHeaderClick = _props2.onHeaderClick,
+        onItemClick = _props2.onItemClick,
+        other = (0, _objectWithoutProperties3.default)(_props2, ['data', 'headers', 'style', 'onHeaderClick', 'onItemClick']);
     var prepareStyles = this.context.muiTheme.prepareStyles;
 
 
@@ -270,7 +270,7 @@ var TableList = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, styles.root, style)) }),
+      (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, styles.root, style)) }),
       _react2.default.createElement(
         'div',
         { style: { paddingLeft: 16, paddingRight: 16 } },
